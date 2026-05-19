@@ -470,7 +470,6 @@ void savememberstoCSV(member members[], int jumlahmember) {
     file.close();
 }
 
-// PERBAIKAN: Hapus parameter username, tambahkan input username baru dengan validasi
 void createdatamember(member members[], int &jumlahmember) {
     MiloUtils::clearScreen();
     try {
@@ -481,14 +480,12 @@ void createdatamember(member members[], int &jumlahmember) {
         baru.id = (jumlahmember > 0) ? members[jumlahmember-1].id + 1 : 1;
         baru.diskon_aktif = false;
         baru.nominal_diskon = 0;
-        
-        // Input username baru untuk member dengan validasi duplikasi
+
         while (true) {
             cout << "\033[1;37mUSERNAME: \033[0m";
             getline(cin, baru.username);
             ASSERT(!baru.username.empty(), "username tidak boleh kosong");
             
-            // Cek apakah username sudah ada di database member
             bool usernameada = false;
             for (int i = 0; i < jumlahmember; i++) {
                 if (members[i].username == baru.username) {
